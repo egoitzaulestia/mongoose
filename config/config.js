@@ -1,4 +1,4 @@
-const mongoose = require("mogoose");
+const mongoose = require("mongoose");
 const { MONGO_URI } = require("./keys");
 
 const dbConnection = async () => {
