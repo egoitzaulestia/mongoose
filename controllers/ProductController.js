@@ -36,6 +36,17 @@ const ProductController = {
       res.status(500).send({ message: "Error", error });
     }
   },
+
+  async getProductsByName(req, res) {
+    try {
+      const name = new RegExp(req.params.name, "i");
+      const products = await Product.find({ name });
+      res.status(200).send(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Error", error });
+    }
+  },
 };
 
 module.exports = ProductController;
