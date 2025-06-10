@@ -59,11 +59,10 @@ Before running this project, make sure you have the following installed:
    npm install
    ```
 
-3. **Set up environment variables**
-   Create a `.env` file in the root directory:
+3. **Set up Atlas database connection**
+   Use `keys.example.js` file in the config directory:
    ```env
    MONGODB_URI=your_mongodb_atlas_connection_string
-   PORT=3000
    ```
 
 ## ⚙️ Configuration
