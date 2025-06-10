@@ -8,5 +8,9 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+ProductSchema.index({
+  name: "text",
+});
+
 const Product = mongoose.model("Product", ProductSchema);
 module.exports = Product;
