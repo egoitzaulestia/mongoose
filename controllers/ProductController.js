@@ -39,6 +39,9 @@ const ProductController = {
 
   async getProductsByName(req, res) {
     try {
+      if (req.params.name.length > 20) {
+        return res.status(400).send({ message: "Too long search" });
+      }
       const name = new RegExp(req.params.name, "i");
       const products = await Product.find({ name });
       res.status(200).send(products);
