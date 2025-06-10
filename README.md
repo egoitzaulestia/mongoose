@@ -60,7 +60,9 @@ Before running this project, make sure you have the following installed:
    ```
 
 3. **Set up Atlas database connection**
+
    Use `keys.example.js` file in the config directory:
+
    ```env
    MONGODB_URI=your_mongodb_atlas_connection_string
    ```
@@ -112,7 +114,7 @@ GET /products
 
 ```bash
 PUT /products/id/60d5ec49f1b2c8b1f8c8e8e8
-Content-Type: application/json
+Body: raw/json (in Postman)
 
 {
   "name": "Gaming Laptop",
