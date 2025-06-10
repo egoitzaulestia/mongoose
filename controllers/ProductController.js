@@ -50,6 +50,33 @@ const ProductController = {
       res.status(500).send({ message: "Error", error });
     }
   },
+
+  async getProductsByNameIndex(req, res) {
+    try {
+      const products = await Product.find({
+        $text: {
+          $search: `"${req.params.nameIndex}"`,
+        },
+      });
+      res.status(200).send(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Error", error });
+    }
+  },
+
+  async delete(req, res) {
+    try {
+      const product = await Product.findByIdAndDelete(req.params.id);
+      res.status(200).send({ message: "Product deleted", error });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        message: "There was an error trying to remove the product",
+        error,
+      });
+    }
+  },
 };
 
 module.exports = ProductController;
