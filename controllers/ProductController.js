@@ -16,6 +16,16 @@ const ProductController = {
       });
     }
   },
+
+  async getAll(req, res) {
+    try {
+      const products = await Product.find();
+      res.status(200).send(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "There was an error", error });
+    }
+  },
 };
 
 module.exports = ProductController;
