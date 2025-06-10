@@ -26,6 +26,16 @@ const ProductController = {
       res.status(500).send({ message: "There was an error", error });
     }
   },
+
+  async getById(req, res) {
+    try {
+      const product = await Product.findById(req.params.id);
+      res.status(200).send(product);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Error", error });
+    }
+  },
 };
 
 module.exports = ProductController;
