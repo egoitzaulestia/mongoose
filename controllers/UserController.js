@@ -50,8 +50,9 @@ const UserController = {
   async getInfo(req, res) {
     try {
       const user = await User.findById(req.user._id).populate("orderIds");
+      res.status(200).send(user);
     } catch (error) {
-      console.error(erro);
+      console.error(error);
       res
         .status(500)
         .send({ message: "Error while retriving user data", error });
