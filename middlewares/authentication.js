@@ -36,4 +36,20 @@ const isAdmin = async (req, res, next) => {
   next();
 };
 
-module.exports = { authentication, isAdmin };
+const isAuthor = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params_id);
+    if (order.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).send({ message: "This is not your order" });
+    }
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      error,
+      message: "There was an error while checking the authority of the order",
+    });
+  }
+};
+
+module.exports = { authentication, isAdmin, isAuthor };
