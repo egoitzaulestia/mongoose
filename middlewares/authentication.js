@@ -27,4 +27,12 @@ const authentication = async (req, res, next) => {
   }
 };
 
-module.exports = { authentication };
+const isAdmin = async (req, res, next) => {
+  const admins = ["admins", "superadmin"];
+
+  if (!admins.includes(req.user.role)) {
+    return res.status(403).send({ message: "You do not have permission" });
+  }
+};
+
+module.exports = { authentication, isAdmin };
