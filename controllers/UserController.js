@@ -46,6 +46,17 @@ const UserController = {
       res.status(500).send({ message: "There was a problem trying to logout" });
     }
   },
+
+  async getInfo(req, res) {
+    try {
+      const user = await User.findById(req.user._id).populate("orderIds");
+    } catch (error) {
+      console.error(erro);
+      res
+        .status(500)
+        .send({ message: "Error while retriving user data", error });
+    }
+  },
 };
 
 module.exports = UserController;
