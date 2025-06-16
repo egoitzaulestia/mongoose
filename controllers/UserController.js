@@ -34,6 +34,18 @@ const UserController = {
       res.status(500).send({ message: "Error", error });
     }
   },
+
+  async logout(req, res) {
+    try {
+      await User.findByIdAndUpdate(req.user._id, {
+        $pull: { tokens: req.headers.authorization },
+      });
+      res.status(200).send({ message: "Logout successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "There was a problem trying to logout" });
+    }
+  },
 };
 
 module.exports = UserController;
