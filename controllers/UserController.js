@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { jwt_token } = require("../config/keys");
+const { jwt_secret } = require("../config/keys");
 
 const UserController = {
   async register(req, res) {
@@ -19,7 +19,9 @@ const UserController = {
         email: req.body.email,
       });
 
-      const token = jwt.sign({ _id: user._id }, jwt_token, { expiresIn: "7d" });
+      const token = jwt.sign({ _id: user._id }, jwt_secret, {
+        expiresIn: "7d",
+      });
 
       if (user.tokens.length > 3) user.tokens.shift();
 
