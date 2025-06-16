@@ -15,6 +15,14 @@ const OrderController = {
       res.status(500).send({ message: "Error", error });
     }
   },
+
+  async update(req, res) {
+    try {
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Error", error });
+    }
+  },
 };
 
 module.exports = OrderController;
