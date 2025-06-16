@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Order = require("../models/Order");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/keys");
 
@@ -38,7 +39,7 @@ const isAdmin = async (req, res, next) => {
 
 const isAuthor = async (req, res, next) => {
   try {
-    const order = await Order.findById(req.params_id);
+    const order = await Order.findById(req.params._id);
     if (order.userId.toString() !== req.user._id.toString()) {
       return res.status(403).send({ message: "This is not your order" });
     }
