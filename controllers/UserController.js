@@ -14,18 +14,23 @@ const UserController = {
   },
 
   async login(req, res) {
-    const user = await User.findOne({
-      email: req.body.email,
-    });
+    try {
+      const user = await User.findOne({
+        email: req.body.email,
+      });
 
-    const token = jwt.sign({ _id: user._id, jwt_token });
+      const token = jwt.sign({ _id: user._id }, jwt_token, { expiresIn: "7d" });
 
-    if (user.tokens.length > 3) user.tokens.shift();
+      if (user.tokens.length > 3) user.tokens.shift();
 
-    user.tokens.push(token);
-    await user.save();
+      user.tokens.push(token);
+      await user.save();
 
-    res.status(200).send({ message: `Welcome ${user.name}`, token });
+      res.status(200).send({ message: `Welcome ${user.name}`, token });
+    } catch (error) {
+      console.error;
+      res.status(500).send({ message: "Error", error });
+    }
   },
 };
 
