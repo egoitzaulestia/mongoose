@@ -18,6 +18,12 @@ const OrderController = {
 
   async update(req, res) {
     try {
+      const order = await Order.findByIdAndUpdate(
+        req.params._id,
+        { ...req.body, userId: req.user._id },
+        { new: true }
+      );
+      res.send({ message: "Order updated successfully", order });
     } catch (error) {
       console.error(error);
       res.status(500).send({ message: "Error", error });
