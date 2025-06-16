@@ -23,6 +23,7 @@ const ProductController = {
       const { page = 1, limit = 10 } = req.query;
 
       const products = await Product.find()
+        .populate("reviews.userId")
         .limit(limit)
         .skip((page - 1) * limit);
 
@@ -106,11 +107,15 @@ const ProductController = {
 
   async insertComment(req, res) {
     try {
-      const product = await Product.findByIdAndUpdate(req.params._id, {
-        $push: {
-          reviews: { userId: req.user._id, comment: req.body.comment },
+      const product = await Product.findByIdAndUpdate(
+        req.params._id,
+        {
+          $push: {
+            reviews: { userId: req.user._id, comment: req.body.comment },
+          },
         },
-      });
+        { new: true }
+      );
       res
         .status(201)
         .send({ message: "Comment created successfully", product });

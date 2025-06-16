@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ObjectId = mongoose.SchemaTypes.ObjectId;
 
 const UserSchema = new mongoose.Schema(
   {
@@ -8,6 +9,7 @@ const UserSchema = new mongoose.Schema(
     age: Number,
     tokens: [],
     role: String,
+    orderIds: [{ type: ObjectId, ref: "Order" }],
   },
   { timestamps: true }
 );

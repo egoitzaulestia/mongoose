@@ -1,16 +1,21 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.SchemaTypes.ObjectId;
 
+// sub-schema for reviews
+const RevieSchema = new mongoose.Schema(
+  {
+    userId: { type: ObjectId, ref: "User" },
+    comment: String,
+  },
+  { timestamps: true }
+);
+
 const ProductSchema = new mongoose.Schema(
   {
     name: String,
     price: Number,
     reviews: [
-      {
-        userId: { type: ObjectId, ref: "User" },
-        comment: String,
-      },
-      { timestamps: true }, // timestamps of the comment
+      RevieSchema, // We pass the sub-schema for reviews
     ],
   },
   { timestamps: true } // timestamps of the product
