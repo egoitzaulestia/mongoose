@@ -40,7 +40,7 @@ const UserController = {
       await User.findByIdAndUpdate(req.user._id, {
         $pull: { tokens: req.headers.authorization },
       });
-      res.status(200).send({ message: "Logout successfully" });
+      res.status(200).send({ message: `Goodbye ${req.user.name} !` });
     } catch (error) {
       console.error(error);
       res.status(500).send({ message: "There was a problem trying to logout" });
