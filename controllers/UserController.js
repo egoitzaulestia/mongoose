@@ -51,12 +51,14 @@ const UserController = {
 
   async getInfo(req, res) {
     try {
-      const user = await User.findById(req.user._id).populate({
-        path: "orderIds",
-        populate: {
-          path: "productIds",
-        },
-      });
+      const user = await User.findById(req.user._id)
+        .populate({
+          path: "orderIds",
+          populate: {
+            path: "productIds",
+          },
+        })
+        .populate("wishList");
       res.status(200).send(user);
     } catch (error) {
       console.error(error);
