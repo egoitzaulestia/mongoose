@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema(
     role: String,
     tokens: [],
     orderIds: [{ type: ObjectId, ref: "Order" }],
+    wishList: [{ type: ObjectId, ref: "Product" }],
   },
   { timestamps: true }
 );

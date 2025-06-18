@@ -17,6 +17,7 @@ const ProductSchema = new mongoose.Schema(
     reviews: [
       RevieSchema, // We pass the sub-schema for reviews
     ],
+    likes: [{ type: ObjectId }],
   },
   { timestamps: true } // timestamps of the product
 );
