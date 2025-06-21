@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
+
 const MONGO_URI = procress.env.MONGO_URI;
 
 const dbConnection = async () => {
@@ -12,6 +13,4 @@ const dbConnection = async () => {
   }
 };
 
-module.exports = {
-  dbConnection,
-};
+module.exports = { dbConnection };
